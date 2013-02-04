@@ -16,14 +16,19 @@ else
 	printf '\033[0;31m%s\033[0m\n' 'There was an error updating. Try again later?'
 fi
 
-if (git fetch upstream && git merge upstream/master); then
-	printf '\033[0;32m%s\033[0m\n' 'Upstream had changes, merge was successful!'
-	printf '\033[0;32m%s\033[0m\n' 'Pushing to Github...'
-	git push -f origin master
-	printf '\033[0;32m%s\033[0m\n' 'Completed!'
+if (git remote | grep upstream); then
+	if (git remote | grep upstream && git fetch upstream && git merge upstream/master); then
+		printf '\033[0;32m%s\033[0m\n' 'Upstream had changes, merge was successful!'
+		printf '\033[0;32m%s\033[0m\n' 'Pushing to Github...'
+		git push -f origin master
+		printf '\033[0;32m%s\033[0m\n' 'Completed!'
+	else
+		printf '\033[0;31m%s\033[0m\n' 'There was an error updating from upstream. Try again later?'
+	fi
 else
-	printf '\033[0;31m%s\033[0m\n' 'There was an error updating from upstream. Try again later?'
+	printf '\033[0;32m%s\033[0m\n' 'There was no upstream remote, will not pull changes from original oh-my-sh!'
 fi
+
 
 
 cd "$current_path"
