@@ -16,6 +16,11 @@ else
 	printf '\033[0;31m%s\033[0m\n' 'There was an error updating. Try again later?'
 fi
 
+if (git submodule init && git submodule update); then
+	printf '\033[0;32m%s\033[0m\n' 'All submodules updated!'
+fi
+
+
 if (git remote | grep upstream); then
 	if (git remote | grep upstream && git fetch upstream && git merge upstream/master); then
 		printf '\033[0;32m%s\033[0m\n' 'Upstream had changes, merge was successful!'
@@ -28,7 +33,5 @@ if (git remote | grep upstream); then
 else
 	printf '\033[0;32m%s\033[0m\n' 'There was no upstream remote, will not pull changes from original oh-my-sh!'
 fi
-
-
 
 cd "$current_path"
