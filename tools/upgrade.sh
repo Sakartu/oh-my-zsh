@@ -1,9 +1,6 @@
-current_path=`pwd`
-current_path=${current_path/ /\\ }
 printf '\033[0;34m%s\033[0m\n' "Upgrading Oh My Zsh"
 cd "$ZSH"
-
-if git pull
+if git pull origin master
 then
 	printf '\033[0;32m%s\033[0m\n' '         __                                     __   '
 	printf '\033[0;32m%s\033[0m\n' '  ____  / /_     ____ ___  __  __   ____  _____/ /_  '
@@ -35,4 +32,3 @@ else
 	printf '\033[0;32m%s\033[0m\n' 'There was no upstream remote, will not pull changes from original oh-my-sh!'
 fi
 
-cd "$current_path"
